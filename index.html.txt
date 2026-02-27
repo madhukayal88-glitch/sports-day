@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sports Day Race</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .track {
+            width: 90%;
+            height: 60px;
+            border: 2px solid black;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .runner {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 5px;
+            left: 0;
+            font-size: 40px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🏆 Sports Day Race</h1>
+
+    <div class="track">
+        <div class="runner" id="runner1">🏃</div>
+    </div>
+
+    <div class="track">
+        <div class="runner" id="runner2">🏃</div>
+    </div>
+
+    <div class="track">
+        <div class="runner" id="runner3">🏃</div>
+    </div>
+
+    <button onclick="startRace()">Start Race</button>
+
+    <h2 id="winner"></h2>
+
+    <script>
+        function startRace() {
+            let runners = [
+                document.getElementById("runner1"),
+                document.getElementById("runner2"),
+                document.getElementById("runner3")
+            ];
+
+            let winnerDeclared = false;
+            document.getElementById("winner").innerText = "";
+
+            runners.forEach(runner => {
+                runner.style.left = "0px";
+
+                let interval = setInterval(() => {
+                    let current = parseInt(runner.style.left);
+                    let move = Math.floor(Math.random() * 20);
+                    runner.style.left = current + move + "px";
+
+                    if (current >= 800 && !winnerDeclared) {
+                        winnerDeclared = true;
+                        document.getElementById("winner").innerText = "🎉 Winner!";
+                        clearInterval(interval);
+                    }
+                }, 200);
+            });
+        }
+    </script>
+
+</body>
+</html>
